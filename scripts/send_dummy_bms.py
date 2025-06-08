@@ -69,11 +69,12 @@ def main():
 
     frames = create_frames()
 
-    for frame_id, data in frames:
-        msg = can.Message(arbitration_id=frame_id, data=data, is_extended_id=False)
-        bus.send(msg)
-        print(f"Sent frame 0x{frame_id:X}: {data.hex()}")
-        time.sleep(0.1)
+    while True:
+        for frame_id, data in frames:
+            msg = can.Message(arbitration_id=frame_id, data=data, is_extended_id=False)
+            bus.send(msg)
+            print(f"Sent frame 0x{frame_id:X}: {data.hex()}")
+            time.sleep(0.1)
 
 
 if __name__ == '__main__':
